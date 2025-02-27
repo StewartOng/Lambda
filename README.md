@@ -16,7 +16,7 @@ You would need to add the necessary permissions to the execution role to allow t
 •	s3:PutObjectAcl – If the Lambda function needs to set permissions on the uploaded objects (for example, setting access control lists), this permission would be necessary.
 The policy would look something like this:
 json
-Copy
+
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -30,6 +30,7 @@ Copy
         }
     ]
 }
+
 Update on the Resource-Based Policy:
 In general, the resource-based policy for the Lambda function does not need to change if the Lambda function is only uploading files to an S3 bucket. However, if the Lambda function needs to invoke other AWS services (like S3) as part of the file upload process, then the service invoking Lambda (S3 in this case) needs the appropriate permissions to invoke the Lambda function.
 If the question is about how S3 invokes the Lambda function upon file creation, ensure that the Lambda resource-based policy allows S3 to trigger the function. But for the purpose of uploading to S3, no update to the Lambda function's resource-based policy is required unless another service, such as another Lambda function, needs permission to invoke this Lambda function.
